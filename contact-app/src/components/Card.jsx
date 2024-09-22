@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Card = ({ user, isSelected, onSelectUser }) => {
+
   return (
     <div 
       className={`text-black rounded-sm h-[100px]`} 

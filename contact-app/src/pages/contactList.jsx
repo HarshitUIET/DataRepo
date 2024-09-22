@@ -6,9 +6,12 @@ import { useNavigate } from 'react-router-dom';
 const ContactList = ({selectedUser,setSelectedUser}) => {
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(selectedUser) navigate(`/contact/${selectedUser?.id}`);
-  },[selectedUser])
+  // useEffect(() => {
+  //   // Navigate only when selectedUser exists and has a valid id
+  //   if (selectedUser && selectedUser.id) {
+  //     navigate(`/contact/${selectedUser.id}`);
+  //   }
+  // }, [selectedUser, navigate]);
 
   return (
     <div className='h-full'>

@@ -2,14 +2,15 @@ import React from 'react'
 import Card from './Card'
 import { useState } from 'react'
 import { users } from '../contacts'
+import { useNavigate } from 'react-router-dom'
 
 const UserList = ({selectedUser,setSelectedUser}) => {
 
-    
+    const navigate = useNavigate();
 
     const handleSelectUser = (user) => {
-        console.log("Calling handleSelectUser", user);  
         setSelectedUser(user);
+        navigate(`/contact/${user.id}`);
     };
 
     return (
