@@ -2,3 +2,4 @@
 /node_modules/
 /contact-app/node_modules/
 /contact-app-backend/node_modules/
+package-lock.json

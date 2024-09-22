@@ -9,7 +9,7 @@ const NewMessage = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-otps`);
+        const response = await axios.get(`https://datarepo.onrender.com/get-otps`);
         setMessages(response.data);
       } catch (error) {
         console.error('Failed to fetch messages:', error);

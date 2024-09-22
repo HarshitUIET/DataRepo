@@ -27,7 +27,7 @@ const Otp = () => {
 
   const handleOtpClick = () => {
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/send-otp/twilio`, {
+      .post(`https://datarepo.onrender.com/send-otp/twilio`, {
         name: selectedUser.name,
         phoneNumber: selectedUser.Phone,
         otp,
