@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import OtpCard from '../components/OtpCard';
+import { useNavigate } from 'react-router-dom';
 
 const NewMessage = () => {
   const [messages, setMessages] = useState([]);
@@ -53,7 +54,7 @@ const NewMessage = () => {
                     otp: user.otp,
                     time: convertToIST(user.sentAt), 
                     userName: user.name,
-                    url: "https://randomuser.me/api/portraits/men/12.jpg" 
+                    url: user.url,
                   }}
                 />
               ))

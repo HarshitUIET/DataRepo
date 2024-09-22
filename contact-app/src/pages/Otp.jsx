@@ -31,10 +31,14 @@ const Otp = () => {
         name: selectedUser.name,
         phoneNumber: selectedUser.Phone,
         otp,
+        url:selectedUser.url
       })
       .then((res) => {
         console.log(res.data);
         toast.success("OTP sent successfully to " + selectedUser.name);
+        setTimeout(() => {
+          navigate('/', { replace: true });
+        }, 3000);
       })
       .catch((err) => {
         console.error(err);

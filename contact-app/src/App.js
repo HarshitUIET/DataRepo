@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ContactList selectedUser={selectedUser} setSelectedUser={setSelectedUser} />} />
         <Route path="/contact/:id" element={<ContactInfo selectedUser={selectedUser} setSelectedUser={setSelectedUser} />} />
-        <Route path="/contact/message" element={<NewMessage />} />
+        <Route path="/contact/message" element={<NewMessage  />} />
         <Route path="/contact/:id/otp" element={<Otp />} />
       </Routes>
       </Suspense>

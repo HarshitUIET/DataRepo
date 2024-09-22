@@ -7,19 +7,18 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-
 const otpSchema = new mongoose.Schema({
     name: String,
     otp: String,
+    url: String, 
     sentAt: { type: Date, default: Date.now },
 });
 
-const OtpRecord = mongoose.model('OtpRecord', otpSchema,'OTP');
+const OtpRecord = mongoose.model('OtpRecord', otpSchema, 'OTP');
 
 app.use(express.json());
 
@@ -29,11 +28,10 @@ app.use(cors({
         'https://data-repo-harshituiets-projects.vercel.app'
     ],
     methods: ['GET', 'POST'],
-    credentials: true 
+    credentials: true
 }));
 
-app.options('*', cors()); 
-
+app.options('*', cors());
 
 const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
@@ -42,7 +40,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/send-otp/twilio', async (req, res) => {
-    const { name, phoneNumber, otp } = req.body;
+    const { name, phoneNumber, otp, url } = req.body; 
 
     try {
         const message = await client.messages.create({
@@ -51,7 +49,8 @@ app.post('/send-otp/twilio', async (req, res) => {
             to: phoneNumber,
         });
 
-        const otpRecord = new OtpRecord({ name, otp });
+        
+        const otpRecord = new OtpRecord({ name, otp, url });
         await otpRecord.save();
 
         res.json({ message: 'OTP sent successfully via Twilio', sid: message.sid });
@@ -63,7 +62,7 @@ app.post('/send-otp/twilio', async (req, res) => {
 
 app.get('/get-otps', async (req, res) => {
     try {
-        const otps = await OtpRecord.find().sort({ sentAt: -1 }); 
+        const otps = await OtpRecord.find().sort({ sentAt: -1 });
         res.json(otps);
     } catch (err) {
         console.error(err);
