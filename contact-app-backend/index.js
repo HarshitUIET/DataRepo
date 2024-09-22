@@ -22,9 +22,18 @@ const otpSchema = new mongoose.Schema({
 const OtpRecord = mongoose.model('OtpRecord', otpSchema,'OTP');
 
 app.use(express.json());
+
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: [
+        'http://localhost:3000',
+        'https://data-repo-harshituiets-projects.vercel.app'
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true 
 }));
+
+app.options('*', cors()); 
+
 
 const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
